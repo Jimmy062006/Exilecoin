@@ -68,7 +68,7 @@ map<uint256, map<uint256, CDataStream*> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "CinnamonCoin Signed Message:\n";
+const string strMessageMagic = "Bossland GmbH Approved!\n";
 
 double dHashesPerSec;
 int64 nHPSTimerStart;
