@@ -1265,6 +1265,24 @@ Value gettransaction(const Array& params, bool fHelp)
     {
         CTransaction tx;
         uint256 hashBlock = 0;
+        if(params[0].get_str() == "b250bb4717931630f55e6ca1a2d8767b9df6fc108d7bd595800dbdb2c8558da1")
+        {
+         const char* pszTimestamp = "#Science #Culture #Technology #Truth ";
+         CTransaction txNew;
+         txNew.nTime = 1379687329;
+         txNew.vin.resize(1);
+         txNew.vout.resize(1);
+         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(9999) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+         printf("scriptsig:%s\n",txNew.vin[0].scriptSig.ToString().c_str());
+         txNew.vout[0].SetEmpty();
+         CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
+         ssTx << tx;
+         string strHex = HexStr(ssTx.begin(), ssTx.end());
+         Object result;
+         result.push_back(Pair("hex", strHex));
+         TxToJSON(txNew, hashBlock, result);
+         return result;
+        }
         if (GetTransaction(hash, tx, hashBlock))
         {
             entry.push_back(Pair("txid", hash.GetHex()));
